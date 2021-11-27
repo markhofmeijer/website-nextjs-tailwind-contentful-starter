@@ -1,0 +1,6 @@
+{
+  "_comment": "https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/",
+  "spaceId": "CONTENTFUL_SPACE_ID",
+  "managementToken": "CONTENTFUL_MANAGEMENT_TOKEN",
+  "contentFile": "config/contentful/templates/default_environment.json"
+}

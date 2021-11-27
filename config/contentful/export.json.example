@@ -1,0 +1,18 @@
+{
+  "_comment": "https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/",
+  "spaceId": "YOUR_SPACE_ID",
+  "environmentId": "master",
+  "saveFile": true,
+  "contentFile": "default_environment.json",
+  "includeDrafts": false,
+  "includeArchived": false,
+  "skipContentModel": false,
+  "skipContent": true,
+  "skipRoles": true,
+  "skipWebhooks": true,
+  "contentOnly": false,
+  "downloadAssets": false,
+  "rawProxy": false,
+  "maxAllowedLimit": 1000,
+  "useVerboseRenderer": true
+}
