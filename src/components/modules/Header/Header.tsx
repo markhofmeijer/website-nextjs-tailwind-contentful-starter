@@ -50,6 +50,14 @@ const Header = ({ navItems = [] }: HeaderProps) => {
       if (normalizedHref === "/") {
         return normalizedPath === "/"
       }
+      if (normalizedHref === "/products") {
+        if (normalizedPath === "/products") {
+          return true
+        }
+        if (normalizedPath?.startsWith("/product/")) {
+          return true
+        }
+      }
       return normalizedPath === normalizedHref
     },
     [normalizedPath],
