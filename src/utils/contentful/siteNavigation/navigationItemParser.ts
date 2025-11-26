@@ -1,16 +1,23 @@
-import { Entry } from "contentful"
+import type { UnresolvedLink } from "contentful"
 
-import { ISiteNavigationFields } from "@/types/contentful"
+import { IPageEntry, ISiteNavigationEntry } from "@/types/contentful"
 import { INavigationItem } from "@/types/navigation"
+
+const isResolvedEntry = <T extends { sys: { type: string } }>(
+  entry?: T | UnresolvedLink<"Entry">
+): entry is T => Boolean(entry && entry.sys.type !== "Link")
 
 export default function navigationItemParser({
   sys,
   fields,
-}: Entry<ISiteNavigationFields>): INavigationItem {
-  const slug = fields.page && fields.page.sys.type !== "Link" ? fields.page.fields.slug : null
+}: ISiteNavigationEntry): INavigationItem {
+  const pageEntry: IPageEntry | null = isResolvedEntry<IPageEntry>(fields.page)
+    ? fields.page
+    : null
+  const slug = pageEntry ? pageEntry.fields.slug : null
 
   const subItems = fields.subNavItems
-    ?.filter(item => item.sys.type !== "Link")
+    ?.filter((item): item is ISiteNavigationEntry => isResolvedEntry(item))
     .map(navigationItemParser)
 
   return {

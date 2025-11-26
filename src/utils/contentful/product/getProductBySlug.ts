@@ -1,9 +1,7 @@
-import { EntryCollection } from "contentful"
-
 import getClient from "../contentful"
 import productParser from "./productParser"
 
-import { IProductFields } from "@/types/contentful"
+import type { IProductSkeleton, LOCALE_CODE } from "@/types/contentful"
 import { IProduct } from "@/types/product"
 
 export default async function getProductBySlug(
@@ -12,7 +10,7 @@ export default async function getProductBySlug(
 ): Promise<IProduct> {
   if (Array.isArray(slug)) slug = slug[0]
 
-  const entries: EntryCollection<IProductFields> = await getClient(preview).getEntries({
+  const entries = await getClient(preview).getEntries<IProductSkeleton, LOCALE_CODE>({
     content_type: "product",
     "fields.slug": slug,
   })

@@ -1,19 +1,24 @@
-import React from "react"
 import Link from "next/link"
+import type { Route } from "next"
+import type { ReactNode } from "react"
 
-export default function CustomLink({
-  children,
-  href,
-}: {
-  children?: React.ReactNode
+interface CustomLinkProps {
+  children?: ReactNode
   href: string
-}): React.ReactElement {
-  return href.startsWith("/") || href === "" ? (
-    <Link href={href}>
-      <a>{children}</a>
-    </Link>
-  ) : (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+}
+
+export default function CustomLink({ children, href }: CustomLinkProps) {
+  if (href.startsWith("/") || href === "") {
+    const internalHref = (href === "" ? "/" : href) as Route
+    return (
+      <Link href={internalHref} className="underline hover:text-gray-900">
+        {children}
+      </Link>
+    )
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="underline hover:text-gray-900">
       {children}
     </a>
   )

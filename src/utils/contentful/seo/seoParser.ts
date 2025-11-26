@@ -1,13 +1,18 @@
-import mediaParser from "../media/mediaParser"
+import mediaParser, { isResolvedAsset } from "../media/mediaParser"
 
-import { ISiteMetadataFields, IPageFields, IProductFields } from "@/types/contentful"
+import { ISiteMetadataEntry, IPageEntry, IProductEntry } from "@/types/contentful"
 import { IMediaImage } from "@/types/media"
 import { ISEO } from "@/types/seo"
 
-export default function seoParser(
-  fields: ISiteMetadataFields | IPageFields | IProductFields
-): ISEO {
-  const image = fields.seo_image ? (mediaParser(fields.seo_image) as IMediaImage) : null
+type SEOFieldSource =
+  | ISiteMetadataEntry["fields"]
+  | IPageEntry["fields"]
+  | IProductEntry["fields"]
+
+export default function seoParser(fields: SEOFieldSource): ISEO {
+  const image = isResolvedAsset(fields.seo_image)
+    ? (mediaParser(fields.seo_image) as IMediaImage)
+    : null
 
   return {
     title: fields.seo_title ?? null,

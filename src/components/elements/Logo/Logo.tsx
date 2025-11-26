@@ -1,22 +1,26 @@
-import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 
+type InternalHref = `/${string}`
+
 interface PropTypes {
-  link?: string
+  link?: InternalHref
   alt?: string
 }
 
-const Logo: React.FC<PropTypes> = props => {
-  const alt = props.alt ? props.alt : "logo"
-  const logo = <Image src="/logo.png" alt={alt} width={280} height={122} />
+const Logo = ({ link, alt = "logo" }: PropTypes) => {
+  const logo = (
+    <Image src="/logo.png" alt={alt} width={280} height={122} priority className="h-auto w-full max-w-xs" />
+  )
 
-  return props.link ? (
-    <Link href={props.link}>
-      <a>{logo}</a>
+  if (!link) {
+    return logo
+  }
+
+  return (
+    <Link href={link} aria-label="Ga naar de startpagina" className="inline-flex items-center">
+      {logo}
     </Link>
-  ) : (
-    logo
   )
 }
 

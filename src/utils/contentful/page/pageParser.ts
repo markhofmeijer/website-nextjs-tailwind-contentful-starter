@@ -1,13 +1,11 @@
-import { Entry } from "contentful"
-
-import mediaParser from "../media/mediaParser"
+import mediaParser, { isResolvedAsset } from "../media/mediaParser"
 import seoParser from "../seo/seoParser"
 
-import { IPageFields } from "@/types/contentful"
+import { IPageEntry } from "@/types/contentful"
 import { IPage } from "@/types/page"
 import { IMediaImage } from "@/types/media"
 
-export default function pageParser({ sys, fields }: Entry<IPageFields>): IPage {
+export default function pageParser({ sys, fields }: IPageEntry): IPage {
   let language, locale
   switch (sys.locale) {
     case "nl":
@@ -23,7 +21,7 @@ export default function pageParser({ sys, fields }: Entry<IPageFields>): IPage {
     id: sys.id,
     slug: fields.slug === "home" ? "/" : fields.slug,
     title: fields.title,
-    image: fields.image ? (mediaParser(fields.image) as IMediaImage) : null,
+    image: isResolvedAsset(fields.image) ? (mediaParser(fields.image) as IMediaImage) : null,
     description: fields.description ?? null,
     language,
     locale,

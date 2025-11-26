@@ -11,6 +11,6 @@ const previewClient = createClient({
   host: "preview.contentful.com",
 })
 
-export default function getClient(preview = false): ContentfulClientApi {
+export default function getClient(preview = false): ContentfulClientApi<undefined> {
   return preview ? previewClient : client
 }

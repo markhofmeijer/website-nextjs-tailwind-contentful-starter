@@ -1,14 +1,13 @@
-import React from "react"
 import Link from "next/link"
 
-const PreviewBanner: React.FC = () => (
-  <div className="p-4 bg-yellow-100 border border-yellow-300 text-center text-sm font-semibold">
-    This is a preview,{" "}
-    <Link href={`/api/exit-preview`}>
-      <a className="underline hover:text-cyan duration-200 transition-colors">
-        click here to close
-      </a>
-    </Link>
+const PreviewBanner = () => (
+  <div className="bg-amber-100 text-amber-900">
+    <div className="container flex flex-col gap-2 py-3 text-sm font-semibold sm:flex-row sm:items-center sm:justify-between">
+      <span>Preview modus is ingeschakeld.</span>
+      <Link href="/api/exit-preview" className="underline hover:text-amber-700">
+        Klik hier om af te sluiten
+      </Link>
+    </div>
   </div>
 )
 
