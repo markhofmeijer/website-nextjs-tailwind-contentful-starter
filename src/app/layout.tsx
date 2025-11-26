@@ -1,4 +1,4 @@
-import type { Metadata } from "next/dist/types"
+import type { Metadata } from "next"
 import { draftMode } from "next/headers"
 import type { ReactNode } from "react"
 

@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-typescript-tailwind-contentful-starter-v12",
+  "name": "nextjs-typescript-tailwind-contentful-starter",
   "private": true,
-  "version": "0.1.1",
+  "version": "1.0.0",
   "author": {
     "name": "Click-Designs",
     "email": "sales@click-designs.nl",

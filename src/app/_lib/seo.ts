@@ -1,4 +1,4 @@
-import type { Metadata } from "next/dist/types"
+import type { Metadata } from "next"
 
 import type { IMetadata } from "@/types/metadata"
 import type { IPage } from "@/types/page"
@@ -41,6 +41,32 @@ export const buildMetadata = ({ siteMetadata, page }: BuildMetadataParams): Meta
   const keywords = buildKeywords(siteSeo.keywords, pageSeo.keywords)
   const ogImages = buildImage(pageSeo.image ?? siteSeo.image ?? null)
   const openGraphUrl = canonicalUrl ?? siteSeo.url ?? undefined
+  const icons: Metadata["icons"] = {
+    icon: [
+      {
+        url: "/favicon.ico",
+        type: "image/x-icon",
+      },
+      {
+        url: "/icons/icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/icons/icon-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/icons/icon-192x192.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    shortcut: ["/favicon.ico"],
+  }
 
   return {
     title,
@@ -52,6 +78,7 @@ export const buildMetadata = ({ siteMetadata, page }: BuildMetadataParams): Meta
         }
       : undefined,
     keywords,
+    icons,
     openGraph: {
       title,
       description,

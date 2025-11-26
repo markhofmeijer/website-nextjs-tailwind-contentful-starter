@@ -8,9 +8,28 @@ interface PropTypes {
   alt?: string
 }
 
-const Logo = ({ link, alt = "logo" }: PropTypes) => {
+const Logo = ({ link, alt = "logo placeholder" }: PropTypes) => {
   const logo = (
-    <Image src="/logo.png" alt={alt} width={280} height={122} priority className="h-auto w-full max-w-xs" />
+    <div className="flex items-center">
+      <Image
+        src="/logo-dark.svg"
+        alt={alt}
+        width={180}
+        height={40}
+        priority
+        className="h-8 w-auto dark:hidden"
+        sizes="(min-width: 1024px) 180px, 140px"
+      />
+      <Image
+        src="/logo-light.svg"
+        alt={alt}
+        width={180}
+        height={40}
+        priority
+        className="hidden h-8 w-auto dark:block"
+        sizes="(min-width: 1024px) 180px, 140px"
+      />
+    </div>
   )
 
   if (!link) {
