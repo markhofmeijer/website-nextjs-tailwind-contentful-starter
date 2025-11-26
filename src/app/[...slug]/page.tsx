@@ -3,10 +3,12 @@ import { draftMode } from "next/headers"
 import { notFound } from "next/navigation"
 
 import { Markdown } from "@/components/elements/Markdown"
+import { getBreadcrumbPath } from "@/utils/navigation/getBreadcrumbPath"
 import {
   getCachedPageBySlug,
   getCachedPageSlugs,
   getCachedSiteMetadata,
+  getCachedSiteNavigation,
 } from "../_lib/data-loaders"
 import { buildMetadata } from "../_lib/seo"
 
@@ -44,16 +46,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Page({ params }: PageProps) {
   const { isEnabled } = await draftMode()
   const slug = toSlug(params.slug)
-  const page = await getCachedPageBySlug(slug, isEnabled).catch(() => null)
+  const [page, navItems] = await Promise.all([
+    getCachedPageBySlug(slug, isEnabled).catch(() => null),
+    getCachedSiteNavigation(isEnabled).catch(() => []),
+  ])
 
   if (!page) {
     notFound()
   }
 
+  const breadcrumbPath = getBreadcrumbPath(navItems, page.slug ?? slug, page.title ?? "/")
+
   return (
     <article className="rounded-3xl bg-white p-8 shadow-sm">
       <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">
-        {page.language}
+        {breadcrumbPath}
       </p>
       <h1 className="mt-2 text-4xl font-bold text-gray-900">{page.title}</h1>
       {page.description ? (

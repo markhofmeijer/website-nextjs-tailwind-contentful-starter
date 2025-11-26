@@ -81,11 +81,13 @@ const Footer = ({ metaData }: FooterProps) => {
         </div>
       </div>
       <div className="border-t border-gray-200 bg-white text-xs text-gray-500 transition-colors dark:border-slate-800 dark:bg-slate-950 dark:text-gray-400">
-        <div className="container relative flex items-center justify-start py-4 sm:justify-center">
-          <p className="w-full pr-20 text-left text-xs text-gray-500 transition-colors dark:text-gray-400 sm:text-center">
-            © {currentYear} {metaData?.clientName ?? "Onbekende organisatie"}. Alle rechten
-            voorbehouden.
-          </p>
+        <div className="container relative flex items-center py-4">
+          <div className="flex w-full items-center justify-start pr-20 sm:justify-center">
+            <p className="text-left text-xs text-gray-500 transition-colors dark:text-gray-400 sm:text-center">
+              © {currentYear} {metaData?.clientName ?? "Onbekende organisatie"}. Alle rechten
+              voorbehouden.
+            </p>
+          </div>
           <div className="pointer-events-auto absolute right-6 top-1/2 -translate-y-1/2">
             <ThemeSwitcher variant="inline" />
           </div>
