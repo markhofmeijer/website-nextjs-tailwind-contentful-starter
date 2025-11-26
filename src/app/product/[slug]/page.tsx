@@ -15,6 +15,32 @@ import { buildMetadata } from "@/app/_lib/seo"
 
 export const revalidate = 300
 
+type BackToProductsLinkProps = {
+  variant: "overlay" | "inline"
+}
+
+const BackToProductsLink = ({ variant }: BackToProductsLinkProps) => {
+  if (variant === "overlay") {
+    return (
+      <Link
+        href="/products"
+        className="inline-flex items-center rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-gray-900 shadow-md ring-1 ring-black/5 transition hover:bg-white"
+      >
+        &larr; Alle producten
+      </Link>
+    )
+  }
+
+  return (
+    <Link
+      href="/products"
+      className="inline-flex items-center text-sm font-semibold text-indigo-600 transition hover:text-indigo-500"
+    >
+      &larr; Alle producten
+    </Link>
+  )
+}
+
 type PageParams = {
   slug: string
 }
@@ -68,28 +94,6 @@ export default async function ProductPage({ params }: PageProps) {
 
   if (!product) {
     notFound()
-  }
-
-  const BackToProductsLink = ({ variant }: { variant: "overlay" | "inline" }) => {
-    if (variant === "overlay") {
-      return (
-        <Link
-          href="/products"
-          className="inline-flex items-center rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-gray-900 shadow-md ring-1 ring-black/5 transition hover:bg-white"
-        >
-          &larr; Alle producten
-        </Link>
-      )
-    }
-
-    return (
-      <Link
-        href="/products"
-        className="inline-flex items-center text-sm font-semibold text-indigo-600 transition hover:text-indigo-500"
-      >
-        &larr; Alle producten
-      </Link>
-    )
   }
 
   return (
