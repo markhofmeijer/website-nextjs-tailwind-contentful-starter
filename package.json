@@ -11,31 +11,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cf-codegen": "contentful-typescript-codegen --output src/types/contentful.d.ts"
+    "lint": "eslint . --max-warnings=0",
+    "cf-codegen": "contentful-typescript-codegen --output src/types/contentful.d.ts",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@contentful/rich-text-from-markdown": "^16.1.8",
-    "@contentful/rich-text-react-renderer": "^15.22.4",
-    "contentful": "^10.6.6",
-    "next-themes": "^0.2.1",
-    "next": "^14.2.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@contentful/rich-text-react-renderer": "^16.1.6",
+    "contentful": "^11.9.0",
+    "next": "^16.0.4",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.25",
-    "@types/react": "^18.2.66",
-    "autoprefixer": "^10.4.17",
-    "contentful-management": "^10.46.0",
-    "contentful-typescript-codegen": "^3.3.0",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.6",
-    "eslint-config-prettier": "^9.1.0",
-    "postcss": "^8.4.38",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.5.4"
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "contentful-management": "^11.63.1",
+    "contentful-typescript-codegen": "^3.4.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.0.4",
+    "eslint-config-prettier": "^10.1.8",
+    "lightningcss": "^1.30.2",
+    "lightningcss-wasm": "^1.30.2",
+    "postcss-lightningcss": "^1.0.2",
+    "patch-package": "^8.0.1",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "@tailwindcss/postcss": "^4.1.17",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  },
+  "resolutions": {
+    "lightningcss": "npm:lightningcss-wasm@^1.30.2"
   }
 }

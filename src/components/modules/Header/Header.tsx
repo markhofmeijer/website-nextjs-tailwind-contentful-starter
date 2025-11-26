@@ -193,11 +193,6 @@ const Header = ({ navItems = [] }: HeaderProps) => {
     updatePanelOffset(undefined, width)
   }, [activeMenuId, measurePanelWidth, updatePanelOffset])
 
-  const activeMenuItem = useMemo(
-    () => navItems.find(item => item.id === activeMenuId) ?? null,
-    [navItems, activeMenuId],
-  )
-
   return (
     <header className="relative z-40 border-b border-gray-200 bg-white text-gray-900 transition-colors dark:border-slate-800 dark:bg-slate-900 dark:text-gray-100">
       <div className="container flex items-center gap-6 py-4" ref={containerRef}>
@@ -370,7 +365,7 @@ const DesktopNav = ({
 
 interface MegaPanelProps {
   item: INavigationItem | null
-  panelRef: RefObject<HTMLDivElement>
+  panelRef: RefObject<HTMLDivElement | null>
   offset: number
   visible: boolean
   isHrefActive: (href: string | null) => boolean

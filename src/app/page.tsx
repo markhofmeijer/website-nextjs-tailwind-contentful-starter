@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next/dist/types"
 import { draftMode } from "next/headers"
 import { notFound } from "next/navigation"
 
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     ])
 
     return buildMetadata({ siteMetadata, page })
-  } catch (error) {
+  } catch (_error) {
     return {}
   }
 }

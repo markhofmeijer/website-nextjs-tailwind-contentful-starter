@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next/dist/types"
 import { draftMode } from "next/headers"
 import type { ReactNode } from "react"
 
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     const siteMetadata = await getCachedSiteMetadata(false)
     return buildMetadata({ siteMetadata })
-  } catch (error) {
+  } catch (_error) {
     return {
       title: "Website",
       description: "Contentful site",

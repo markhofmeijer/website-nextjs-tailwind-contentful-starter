@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next/dist/types"
 
 import type { IMetadata } from "@/types/metadata"
 import type { IPage } from "@/types/page"

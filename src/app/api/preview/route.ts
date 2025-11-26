@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
   try {
     await getClient(true).getEntry(entryId)
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ message: "Invalid metadata" }, { status: 401 })
   }
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next/dist/types"
 import { draftMode } from "next/headers"
 import { notFound } from "next/navigation"
 
@@ -14,10 +14,12 @@ import { buildMetadata } from "../_lib/seo"
 
 export const revalidate = 300
 
+type PageParams = {
+  slug: string[]
+}
+
 type PageProps = {
-  params: {
-    slug: string[]
-  }
+  params: PageParams | Promise<PageParams>
 }
 
 const toSlug = (segments: string[] | undefined) => segments?.join("/") ?? ""
@@ -31,21 +33,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
-    const slug = toSlug(params.slug)
+    const resolvedParams = await params
+    const slug = toSlug(resolvedParams.slug)
     const [siteMetadata, page] = await Promise.all([
       getCachedSiteMetadata(false),
       getCachedPageBySlug(slug, false).catch(() => null),
     ])
 
     return buildMetadata({ siteMetadata, page })
-  } catch (error) {
+  } catch (_error) {
     return {}
   }
 }
 
 export default async function Page({ params }: PageProps) {
   const { isEnabled } = await draftMode()
-  const slug = toSlug(params.slug)
+  const resolvedParams = await params
+  const slug = toSlug(resolvedParams.slug)
   const [page, navItems] = await Promise.all([
     getCachedPageBySlug(slug, isEnabled).catch(() => null),
     getCachedSiteNavigation(isEnabled).catch(() => []),

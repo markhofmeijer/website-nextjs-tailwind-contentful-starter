@@ -1,0 +1,38 @@
+diff --git a/node_modules/proxy-from-env/index.js b/node_modules/proxy-from-env/index.js
+index df75004..18cc9ee 100644
+--- a/node_modules/proxy-from-env/index.js
++++ b/node_modules/proxy-from-env/index.js
+@@ -1,6 +1,20 @@
+ 'use strict';
+ 
+-var parseUrl = require('url').parse;
++function parseTargetUrl(target) {
++  if (!target) {
++    return {};
++  }
++
++  if (typeof target === 'string') {
++    try {
++      return new URL(target);
++    } catch (error) {
++      return {};
++    }
++  }
++
++  return target;
++}
+ 
+ var DEFAULT_PORTS = {
+   ftp: 21,
+@@ -22,9 +36,9 @@ var stringEndsWith = String.prototype.endsWith || function(s) {
+  *  given URL. If no proxy is set, this will be an empty string.
+  */
+ function getProxyForUrl(url) {
+-  var parsedUrl = typeof url === 'string' ? parseUrl(url) : url || {};
++  var parsedUrl = parseTargetUrl(url);
+   var proto = parsedUrl.protocol;
+-  var hostname = parsedUrl.host;
++  var hostname = parsedUrl.host || parsedUrl.hostname;
+   var port = parsedUrl.port;
+   if (typeof hostname !== 'string' || !hostname || typeof proto !== 'string') {
+     return '';  // Don't proxy URLs without a valid scheme or host.
