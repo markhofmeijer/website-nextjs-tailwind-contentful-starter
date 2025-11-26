@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { getBreadcrumbPath } from "@/utils/navigation/getBreadcrumbPath"
 import { DefaultPageSection } from "@/app/_components/DefaultPageSection"
 import { ProductGrid } from "@/app/_components/ProductGrid"
+import { ContactForm } from "@/app/_components/ContactForm"
 import {
   getCachedPageBySlug,
   getCachedPageSlugs,
@@ -66,6 +67,7 @@ export default async function Page({ params }: PageProps) {
 
   const breadcrumbPath = getBreadcrumbPath(navItems, page.slug ?? slug, page.title ?? "/")
   const isProductsPage = shouldLoadProducts || page.slug === "/products"
+  const isContactPage = slug === "contact" || page.slug === "/contact"
   const pageSection = (
     <DefaultPageSection
       breadcrumbPath={breadcrumbPath}
@@ -86,6 +88,15 @@ export default async function Page({ params }: PageProps) {
           heading="Alle producten"
           columnClassName="md:grid-cols-3"
         />
+      </div>
+    )
+  }
+
+  if (isContactPage) {
+    return (
+      <div className="space-y-10">
+        {pageSection}
+        <ContactForm />
       </div>
     )
   }

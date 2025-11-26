@@ -74,7 +74,7 @@ const ProductGrid = ({
                 {product.slug ? (
                   <Link
                     href={`/product/${product.slug}`}
-                    className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-600"
+                    className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-400"
                     aria-label={`Bekijk ${product.name}`}
                   >
                     <span className="sr-only">Bekijk {product.name}</span>

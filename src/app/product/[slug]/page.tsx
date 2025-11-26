@@ -34,7 +34,7 @@ const BackToProductsLink = ({ variant }: BackToProductsLinkProps) => {
   return (
     <Link
       href="/products"
-      className="inline-flex items-center text-sm font-semibold text-indigo-600 transition hover:text-indigo-500"
+      className="inline-flex items-center text-sm font-semibold text-orange-500 transition hover:text-orange-400"
     >
       &larr; Alle producten
     </Link>
