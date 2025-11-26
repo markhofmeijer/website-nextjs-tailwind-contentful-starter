@@ -1,13 +1,11 @@
-import { EntryCollection } from "contentful"
-
 import getClient from "../contentful"
 import metadataParser from "./metadataParser"
 
-import { ISiteMetadataFields } from "@/types/contentful"
+import type { ISiteMetadataSkeleton, LOCALE_CODE } from "@/types/contentful"
 import { IMetadata } from "@/types/metadata"
 
 export default async function getSiteMetadata(preview = false): Promise<IMetadata> {
-  const entries: EntryCollection<ISiteMetadataFields> = await getClient(preview).getEntries({
+  const entries = await getClient(preview).getEntries<ISiteMetadataSkeleton, LOCALE_CODE>({
     content_type: "siteMetadata",
   })
 

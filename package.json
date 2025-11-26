@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-typescript-tailwind-contentful-starter-v12",
+  "name": "nextjs-typescript-tailwind-contentful-starter",
   "private": true,
-  "version": "0.1.1",
+  "version": "1.0.0",
   "author": {
     "name": "Click-Designs",
     "email": "sales@click-designs.nl",
@@ -11,34 +11,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cf-codegen": "contentful-typescript-codegen --output src/types/contentful.d.ts"
+    "lint": "eslint . --max-warnings=0",
+    "cf-codegen": "contentful-typescript-codegen --output src/types/contentful.d.ts",
+    "postinstall": "patch-package"
   },
   "dependencies": {
-    "contentful": "^9.1.4",
-    "next": "12.0.4",
-    "preact": "^10.6.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "rehype-react": "^7.0.3",
-    "remark": "^14.0.2",
-    "remark-breaks": "^3.0.2",
-    "remark-gfm": "^3.0.1",
-    "remark-rehype": "^10.0.1"
+    "@contentful/rich-text-from-markdown": "^16.1.8",
+    "@contentful/rich-text-react-renderer": "^16.1.6",
+    "contentful": "^11.9.0",
+    "next": "^16.0.4",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@types/node": "16.11.10",
-    "@types/react": "17.0.37",
-    "autoprefixer": "^10.4.0",
-    "contentful-management": "^7.45.2",
-    "contentful-typescript-codegen": "^3.2.3",
-    "dotenv": "^10.0.0",
-    "eslint": "7",
-    "eslint-config-next": "12.0.4",
-    "eslint-config-prettier": "^8.3.0",
-    "postcss": "^8.4.1",
-    "prettier": "^2.4.1",
-    "tailwindcss": "^2.2.19",
-    "typescript": "4.5.2"
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "contentful-management": "^11.63.1",
+    "contentful-typescript-codegen": "^3.4.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.0.4",
+    "eslint-config-prettier": "^10.1.8",
+    "lightningcss": "^1.30.2",
+    "lightningcss-wasm": "^1.30.2",
+    "patch-package": "^8.0.1",
+    "postcss": "^8.5.6",
+    "postcss-lightningcss": "^1.0.2",
+    "prettier": "^3.6.2",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  },
+  "resolutions": {
+    "lightningcss": "npm:lightningcss-wasm@^1.30.2"
   }
 }

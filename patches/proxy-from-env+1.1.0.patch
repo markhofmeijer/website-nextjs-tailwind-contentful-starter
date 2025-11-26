@@ -1,0 +1,53 @@
+diff --git a/node_modules/proxy-from-env/index.js b/node_modules/proxy-from-env/index.js
+index df75004..fddba7a 100644
+--- a/node_modules/proxy-from-env/index.js
++++ b/node_modules/proxy-from-env/index.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-var parseUrl = require('url').parse;
++var URL = global.URL || require('url').URL;
+ 
+ var DEFAULT_PORTS = {
+   ftp: 21,
+@@ -17,14 +17,14 @@ var stringEndsWith = String.prototype.endsWith || function(s) {
+ };
+ 
+ /**
+- * @param {string|object} url - The URL, or the result from url.parse.
++ * @param {string|object} url - The URL, or an already parsed URL-like object.
+  * @return {string} The URL of the proxy that should handle the request to the
+  *  given URL. If no proxy is set, this will be an empty string.
+  */
+ function getProxyForUrl(url) {
+-  var parsedUrl = typeof url === 'string' ? parseUrl(url) : url || {};
++  var parsedUrl = normalizeUrl(url);
+   var proto = parsedUrl.protocol;
+-  var hostname = parsedUrl.host;
++  var hostname = parsedUrl.host || parsedUrl.hostname || '';
+   var port = parsedUrl.port;
+   if (typeof hostname !== 'string' || !hostname || typeof proto !== 'string') {
+     return '';  // Don't proxy URLs without a valid scheme or host.
+@@ -51,6 +51,22 @@ function getProxyForUrl(url) {
+   return proxy;
+ }
+ 
++function normalizeUrl(url) {
++  if (!url) {
++    return {};
++  }
++
++  if (typeof url === 'string') {
++    try {
++      return new URL(url);
++    } catch (_) {
++      return {};
++    }
++  }
++
++  return url;
++}
++
+ /**
+  * Determines whether a given URL should be proxied.
+  *

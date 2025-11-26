@@ -1,13 +1,11 @@
-import { EntryCollection } from "contentful"
-
 import getClient from "../contentful"
 import pageParser from "./pageParser"
 
-import { IPageFields } from "@/types/contentful"
+import type { IPageSkeleton, LOCALE_CODE } from "@/types/contentful"
 import { IPage } from "@/types/page"
 
 export default async function getPages(preview = false): Promise<IPage[]> {
-  const entries: EntryCollection<IPageFields> = await getClient(preview).getEntries({
+  const entries = await getClient(preview).getEntries<IPageSkeleton, LOCALE_CODE>({
     content_type: "page",
   })
 

@@ -1,3 +1,6 @@
+import type { Document } from "@contentful/rich-text-types"
+
 export interface IMarkdown {
-  src: string | null | undefined
+  src: Document | string | null | undefined
+  label?: string
 }

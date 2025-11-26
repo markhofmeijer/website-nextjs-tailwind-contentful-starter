@@ -1,0 +1,25 @@
+diff --git a/node_modules/follow-redirects/index.js b/node_modules/follow-redirects/index.js
+index a30b32c..d6fe608 100644
+--- a/node_modules/follow-redirects/index.js
++++ b/node_modules/follow-redirects/index.js
+@@ -18,12 +18,14 @@ var debug = require("./debug");
+ }());
+ 
+ // Whether to use the native URL object or the legacy url module
+-var useNativeURL = false;
+-try {
+-  assert(new URL(""));
+-}
+-catch (error) {
+-  useNativeURL = error.code === "ERR_INVALID_URL";
++var useNativeURL = typeof URL === "function";
++if (useNativeURL) {
++  try {
++    new URL("https://localhost");
++  }
++  catch (_error) {
++    useNativeURL = false;
++  }
+ }
+ 
+ // URL fields to preserve in copy operations

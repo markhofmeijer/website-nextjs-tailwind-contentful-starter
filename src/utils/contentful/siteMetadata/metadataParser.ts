@@ -1,11 +1,9 @@
-import { Entry } from "contentful"
-
 import seoParser from "../seo/seoParser"
 
-import { ISiteMetadataFields } from "@/types/contentful"
+import { ISiteMetadataEntry } from "@/types/contentful"
 import { IMetadata } from "@/types/metadata"
 
-export default function metadataParser({ sys, fields }: Entry<ISiteMetadataFields>): IMetadata {
+export default function metadataParser({ sys, fields }: ISiteMetadataEntry): IMetadata {
   return {
     clientName: fields.client_name,
     clientAddress: fields.client_address ?? null,
